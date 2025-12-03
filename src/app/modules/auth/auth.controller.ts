@@ -7,6 +7,7 @@ import AppError from "../../errorHelpers/AppError";
 import httpStatus from "http-status-codes";
 const login = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
+    console.log("I was here");
     const result = await authService.login(req.body);
     const tokenInfo: ITokens = {
       accessToken: result.accessToken,

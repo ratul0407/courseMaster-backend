@@ -19,7 +19,8 @@ const login = async (payload: Partial<IUser>) => {
     throw new Error("Invalid password");
   }
   const { accessToken, refreshToken } = createUserTokens(userExists);
-  return { accessToken, refreshToken };
+  const { password: pass, ...user } = userExists.toObject();
+  return { accessToken, refreshToken, user };
 };
 const getNewAccessToken = async (refreshToken: string) => {
   const newAccessToken = await createNewAccessTokenWithRefreshToken(

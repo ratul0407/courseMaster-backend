@@ -14,6 +14,11 @@ const createUser = async (user: IUser) => {
   return await User.create({ ...user, password, role: Role.STUDENT });
 };
 
+const getMe = async (id: string) => {
+  const user = await User.findById(id).select("-password");
+  return { data: user };
+};
 export const userService = {
   createUser,
+  getMe,
 };
