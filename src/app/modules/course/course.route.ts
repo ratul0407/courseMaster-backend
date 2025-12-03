@@ -1,13 +1,17 @@
 import { Router } from "express";
 import { validateRequest } from "../../middlewares/validateRequest";
-import { courseValidation } from "./course.validation";
 import { courseController } from "./course.controller";
+import { CourseSchema } from "./course.validation";
+import { checkAuth } from "../../middlewares/checkAuth";
+import { Role } from "../user/user.interface";
 
 const router = Router();
 
 router.post(
   "/create",
-  validateRequest(courseValidation.createCourseSchema),
+  checkAuth(Role.ADMIN),
+  validateRequest(CourseSchema),
   courseController.createCourse
 );
+router.get("/", courseController.getAllCourse);
 export const courseRoutes = router;

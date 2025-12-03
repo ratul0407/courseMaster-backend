@@ -14,7 +14,18 @@ const createCourse = catchAsync(
     });
   }
 );
-
+const getAllCourse = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const result = await courseService.getAllCourse();
+    sendResponse(res, {
+      statusCode: httpStatus.CREATED,
+      success: true,
+      message: "Course created successfully",
+      data: result,
+    });
+  }
+);
 export const courseController = {
   createCourse,
+  getAllCourse,
 };
